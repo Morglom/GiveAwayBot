@@ -33,6 +33,33 @@ async def info(ctx):
 async def list(ctx):
     "Lists upcoming giveaways in this server"
     
+    guild = guildDict[ctx.guild.id]
+    
+    # Check if command has been called in management channel
+    public = true
+    if ctx.channel.id == guild[0]
+        public = false
+    
+    giveaways = guild[2]
+    message = "The upcoming giveaways are :\n"
+    
+    # Count giveaways and add their details to the message
+    counter = 0
+    for g in giveaways:
+        # If the channel is not the management channel then don't count private giveaways
+        if g.public == True or (g.public == False and public == False)
+            result += g.name
+            if g.time:
+                result += f" in <t:{g.time}:R> on <t:{g.time}:D> at <t:{g.time}:t>"
+            result += "!\n"
+            message += result
+            counter++
+            
+    if counter <= 0:
+        await ctx.send("No upcoming giveaways.😢")
+    else
+        await ctx.send(message)
+
 @bot.event
 async def on_ready():
     print(f'{bot.user} is connected')
