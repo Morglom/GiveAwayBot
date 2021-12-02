@@ -1,20 +1,19 @@
 class giveaway:
-    id
     name
     description
-    channel
+    # Unix timestamp for giveaway time and date
     time
-    date
     participants
+    # Whether the giveaway has been announced
     public
+    # Whether a participant can win multiple rounds
+    repeats
     
-    def __init__(self, name, description, channel, time, date, participants, public)
-        self.id = id
+    def __init__(self, name, description, time, date, participants, public, repeats)
         self.name = name
         self.description
-        self.channel = channel
         self.time = time
-        self.date = date
         self.participants = participants
         self.public = public
+        self.repeats = repeats
     
