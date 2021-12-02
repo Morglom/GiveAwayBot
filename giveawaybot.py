@@ -14,6 +14,25 @@ TOKEN = os.getenv('DISCORD_TOKEN')
 bot = commands.Bot(command_prefix='!', description=description)
 
 @bot.command()
+async def create(ctx):
+    "Create a new giveaway"
+
+@bot.command()
+async def announce(ctx):
+    "Announce a created giveaway, making the giveaway public and creating a post in the giveaway channel that can be used to sign up for the giveaway"
+
+@bot.command()
+async def update(ctx):
+    "Update the details of a giveaway"
+
+@bot.command()
+async def info(ctx):
+    "Get the details of the giveaway"
+
+@bot.command()
+async def list(ctx):
+    "Lists upcoming giveaways in this server"
+    
 @bot.event
 async def on_ready():
     print(f'{bot.user} is connected')
