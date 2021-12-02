@@ -1,14 +1,17 @@
-import os
-import discord
+import os, discord, datetime, time
+from discord.ext import commands
 from dotenv import load_dotenv
+import giveaway
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 
-client = discord.Client()
+bot = commands.Bot(command_prefix='!', description=description)
 
-@client.event
+@bot.command()
+@bot.event
 async def on_ready():
-    print(f'{client.user} is connected')
-    
-client.run(TOKEN)
+    print(f'{bot.user} is connected')
+
+# When bot joins a server it creates a management role, a management channel and an announcement channel for giveaways
+bot.run(TOKEN)
