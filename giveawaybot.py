@@ -72,18 +72,23 @@ async def on_guild_join(self, guild)
         if manager_role is None
             manager_role = await guild.create_role(name="Giveaway Manager")
         
-        # Overwrites to limit access to the management channel
-        overwrites = {
+        # Overwrites to limit access to the channels
+        managementOverwrites = {
             guild.default_role: discord.PermissionOverwrite(read_messages=False),
             guild.me: discord.PermissionOverwrite(read_messages=True),
             manager_role: discord.PermissionOverwrite(read_messages=True)
         }
+        announcementOverwrites = {
+            guild.default_role: discord.PermissionOverwrite(send_messages=False)
+            guild.me: discord.PermissionOverwrite(send_messages=True),
+            manager_role: discord.PermissionOverwrite(send_messages=True)
+        }
         
         # Check if channels exist and if not create them
         if get(guild.text_channels, name='giveaway-management') is None:
-            await guild.create_text_channel("giveaway-management", overwrites = overwrites)
+            await guild.create_text_channel("giveaway-management", overwrites = managementOverwrites)
         if get(guild.text_channels, name='giveaways') is None:
-            await guild.create_text_channel("giveaways")
+            await guild.create_text_channel("giveaways", overwrites = announcementOverwrites)
         
         # Add details of the guild to the dictionary
         channelDict[guild.id] = [ get(guild.text_channels, name='giveaway-management').id , get(guild.text_channels, name='giveaways').id , []]
