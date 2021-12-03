@@ -13,6 +13,11 @@ TOKEN = os.getenv('DISCORD_TOKEN')
 
 bot = commands.Bot(command_prefix='!', description=description)
 
+# Make an announcment in the announcement channel
+makeAnnouncement(channelId, giveaway):
+    channel = bot.get_channel(channelId)
+    channel.message.send(f"{giveaway.name} is starting in <t:{giveaway.time}:R>")
+
 @bot.command()
 async def create(ctx):
     "Create a new giveaway"
@@ -50,7 +55,7 @@ async def list(ctx):
         if g.public == True or (g.public == False and public == False)
             result += g.name
             if g.time:
-                result += f" in <t:{g.time}:R> on <t:{g.time}:D> at <t:{g.time}:t>"
+                result += f" in <t:{g.time}:R>"
             result += "!\n"
             message += result
             counter++
