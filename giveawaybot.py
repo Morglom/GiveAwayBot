@@ -47,7 +47,7 @@ async def list(ctx):
     
     # Check if command has been called in management channel
     public = true
-    if ctx.channel.id == guild[0]
+    if ctx.channel.id == guild[0]:
         public = false
     
     giveaways = guild[2]
@@ -99,7 +99,7 @@ async def on_ready():
 async def on_guild_join(self, guild)
         # Check if the role already exists and if not create it
         manager_role = get(ctx.guild.roles, name="Giveaway Manager")
-        if manager_role is None
+        if manager_role is None:
             manager_role = await guild.create_role(name="Giveaway Manager")
         
         # Overwrites to limit access to the channels
