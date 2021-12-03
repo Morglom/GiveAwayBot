@@ -3,6 +3,11 @@ from discord.ext import commands
 from dotenv import load_dotenv
 import giveaway
 
+# Time in seconds for time calculations
+hour = 3600
+day = 86400
+week = 604800
+
 description = 'A bot for handling giveaways'
 
 # Dictionary for storing the ids of the management and announcement channels in the first two positions and the list of giveaways in the third position for each server
@@ -64,6 +69,26 @@ async def list(ctx):
         await ctx.send("No upcoming giveaways.😢")
     else:
         await ctx.send(message)
+
+# Check at a regular interval whether any giveaways are coming up and post an announcement message if any events are close
+@tasks.loop(minutes=1)
+async def check_upcoming_giveaways():
+    currTime = time.time()
+    for k,v in guildDict.items():
+        for g in guilds[2]:
+            if g.week:
+                if (g.time - currTime) <= week:
+                    makeAnnouncement(v[1], g)
+                    guildDict[k][2].week = False
+            elif g.day:
+                if (g.time - currTime) <= day:
+                    makeAnnouncement(v[1], g)
+                    guildDict[k][2].day = False
+            elif g.hour:
+                if (g.time - currTime) <= hour:
+                    makeAnnouncement(v[1], g)
+                    guildDict[k][2].week = False
+
 
 @bot.event
 async def on_ready():
