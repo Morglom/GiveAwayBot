@@ -1,4 +1,4 @@
-import os, discord, datetime, time
+import os, discord, time
 from discord.ext import commands
 from dotenv import load_dotenv
 import giveaway
@@ -52,7 +52,7 @@ async def list(ctx):
     counter = 0
     for g in giveaways:
         # If the channel is not the management channel then don't count private giveaways
-        if g.public == True or (g.public == False and public == False)
+        if g.public == True or (g.public == False and public == False):
             result += g.name
             if g.time:
                 result += f" in <t:{g.time}:R>"
@@ -62,7 +62,7 @@ async def list(ctx):
             
     if counter <= 0:
         await ctx.send("No upcoming giveaways.😢")
-    else
+    else:
         await ctx.send(message)
 
 @bot.event
